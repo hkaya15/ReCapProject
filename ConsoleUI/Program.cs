@@ -27,11 +27,23 @@ namespace ConsoleUI
         private static void CarDetailTest(CarManager carManager)
         {
             Console.WriteLine("*************************");
-            foreach (var car in carManager.GetCarDetails())
+            var result = carManager.GetCarDetails();
+
+            if (result.IsSuccess == true)
             {
-                Console.WriteLine("Id: {0} Marka: {1} Renk: {2} Açıklama: {3} Fiyat: {4} ", car.CarId, car.BrandName, car.ColorName, car.Description, car.DailyPrice);
+                foreach (var car in result.Data)
+                {
+                    Console.WriteLine("Id: {0} Marka: {1} Renk: {2} Açıklama: {3} Fiyat: {4} ", car.CarId, car.BrandName, car.ColorName, car.Description, car.DailyPrice);
+                }
             }
-            Console.WriteLine("*************************");
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+
+
+
+
         }
     }
   
