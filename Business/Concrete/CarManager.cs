@@ -43,19 +43,19 @@ namespace Business.Concrete
 
         public IDataResult<List<Car>> GetAll()
         {
-            if(DateTime.Now.Hour>=17 || DateTime.Now.Hour <= 08)
+           /* if(DateTime.Now.Hour>=17 || DateTime.Now.Hour <= 08)
             {
                 return new ErrorDataResult<List<Car>>(Messages.OutUse);
-            }
+            }*/
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(),Messages.CarListed);
         }
 
         public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
-            if (DateTime.Now.Hour >= 17 || DateTime.Now.Hour<=08)
+          /*  if (DateTime.Now.Hour >= 17 || DateTime.Now.Hour<=08)
             {
                 return new ErrorDataResult<List<CarDetailDto>>(Messages.OutUse);
-            }
+            }*/
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(),Messages.CarDetailed);
         }
 
