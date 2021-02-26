@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Core.CrossCuttingConcerns.Validation
+namespace Core.CrossCuttingConcerns.Validation.FluentValidation
 {
     public static class ValidationTool
     {

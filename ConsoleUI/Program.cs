@@ -19,25 +19,25 @@ namespace ConsoleUI
 
             // CarDetailTest(carManager);
 
-            Rental r = new Rental();
-            r.CarId = 3;
-            r.RentDate = DateTime.Now;
-            r.CustomerId = 1;
-            var result=rentalManager.Add(r);
+            /*  Rental r = new Rental();
+              r.CarId = 3;
+              r.RentDate = DateTime.Now;
+              r.CustomerId = 1;
+              var result=rentalManager.Add(r);
 
-            if (result.IsSuccess == true)
-            {
-                foreach (var item in rentalManager.GetAll().Data)
-                {
-                    Console.WriteLine(item.RentDate);
-                }
-            }
-            else
-            {
-                Console.WriteLine(result.Message);
-            }
+              if (result.IsSuccess == true)
+              {
+                  foreach (var item in rentalManager.GetAll().Data)
+                  {
+                      Console.WriteLine(item.RentDate);
+                  }
+              }
+              else
+              {
+                  Console.WriteLine(result.Message);
+              }*/
 
-
+           
 
 
 
