@@ -18,12 +18,11 @@ namespace WebAPI.Controllers
     {
         ICarImageService _carImageService;
 
-        IWebHostEnvironment _webHostEnvironment;
 
-        public CarsImageController(ICarImageService carImageService, IWebHostEnvironment webHostEnvironment)
+        public CarsImageController(ICarImageService carImageService)
         {
             _carImageService = carImageService;
-            _webHostEnvironment = webHostEnvironment;
+
         }
 
         [HttpGet("getall")]
@@ -48,7 +47,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("getbyımagescarıd")]
+        [HttpGet("getbyimagescarid")]
         public IActionResult GetImagesById(int id)
         {
             var result = _carImageService.GetByImagesCarId(id);

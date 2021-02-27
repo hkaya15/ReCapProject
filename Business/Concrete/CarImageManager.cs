@@ -26,11 +26,10 @@ namespace Business.Concrete
             _carImageDal = carImageDal;
         }
 
-       // [ValidationAspect(typeof(CarImageValidator))]
+        [ValidationAspect(typeof(CarImageValidator))]
         public IResult Add(IFormFile file, CarImage carImage)
         {
             IResult result = BusinessRules.Run(CheckIfImageLimit(carImage.CarId));
-
             if (result != null)
             {
                 return result;
@@ -43,7 +42,7 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
-       // [ValidationAspect(typeof(CarImageValidator))]
+      
         public IResult Delete(CarImage carImage)
         {
             IResult result = BusinessRules.Run(CarImageDelete(carImage));
@@ -73,7 +72,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CarImage>>(CheckIfCarImageIsEmpty(id));
         }
 
-       // [ValidationAspect(typeof(CarImageValidator))]
+        [ValidationAspect(typeof(CarImageValidator))]
         public IResult Update(IFormFile file, CarImage carImage)
         {
             carImage.ImagePath = FileHelper.UpdateAsync(_carImageDal.Get(p => p.Id == carImage.Id).ImagePath, file);
@@ -86,7 +85,10 @@ namespace Business.Concrete
 
         private List<CarImage> CheckIfCarImageIsEmpty(int id)
         {
-            string path = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).FullName + @"\Images\default.jpg");
+            //Path Combine=> https://docs.microsoft.com/tr-tr/dotnet/api/system.io.path.combine?view=net-5.0#System_IO_Path_Combine_System_String_System_String_
+            //Directory GetParent => https://docs.microsoft.com/tr-tr/dotnet/api/system.io.directory.getparent?view=net-5.0
+            //Directory GetCurrentDirectory => https://docs.microsoft.com/tr-tr/dotnet/api/system.io.directory.getcurrentdirectory?view=net-5.0
+            string path = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).FullName + @"WebAPI/wwwroot/ImagesRepos/default.png");
             var result = _carImageDal.GetAll(c => c.CarId == id).Any();
 
             if (!result)
@@ -117,7 +119,7 @@ namespace Business.Concrete
         {
             var carImagecount = _carImageDal.GetAll(p => p.CarId == carid).Count;
 
-            if (carImagecount >= 5)
+            if (carImagecount >=5)
             {
                 return new ErrorResult(Messages.FailAddedImageLimit);
             }
