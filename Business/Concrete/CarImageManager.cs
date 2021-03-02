@@ -88,7 +88,8 @@ namespace Business.Concrete
             //Path Combine=> https://docs.microsoft.com/tr-tr/dotnet/api/system.io.path.combine?view=net-5.0#System_IO_Path_Combine_System_String_System_String_
             //Directory GetParent => https://docs.microsoft.com/tr-tr/dotnet/api/system.io.directory.getparent?view=net-5.0
             //Directory GetCurrentDirectory => https://docs.microsoft.com/tr-tr/dotnet/api/system.io.directory.getcurrentdirectory?view=net-5.0
-            string path = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).FullName + @"WebAPI/wwwroot/ImagesRepos/default.png");
+            string path = Path.Combine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).FullName 
+                + @"WebAPI/wwwroot/ImagesRepos/default.png");
             var result = _carImageDal.GetAll(c => c.CarId == id).Any();
 
             if (!result)
