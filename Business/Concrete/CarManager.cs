@@ -24,7 +24,7 @@ namespace Business.Concrete
         {
             _carDal = carDal;
         }
-        [SecuredOperation("add")]
+        [SecuredOperation("admin")]
         [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
@@ -38,6 +38,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarDeleted);
         }
 
+        [SecuredOperation("moderator")]
         public IDataResult<List<Car>> GetAll()
         {
             /* if(DateTime.Now.Hour>=17 || DateTime.Now.Hour <= 08)
