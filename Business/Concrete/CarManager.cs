@@ -3,6 +3,8 @@ using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Performance;
+using Core.Aspects.Autofac.Transaction;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results.Abstract;
@@ -14,7 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Threading;
 
 namespace Business.Concrete
 {
@@ -43,6 +45,7 @@ namespace Business.Concrete
 
        // [SecuredOperation("moderator")]
         [CacheAspect]
+        [PerformanceAspect(5)]
         public IDataResult<List<Car>> GetAll()
         {
             /* if(DateTime.Now.Hour>=17 || DateTime.Now.Hour <= 08)
@@ -63,6 +66,7 @@ namespace Business.Concrete
 
         public IDataResult<List<Car>> GetCarsByBrandId(int id)
         {
+            Thread.Sleep(5000); // Sistemi yavaşlatma
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.BrandId == id));
 
         }
@@ -70,6 +74,13 @@ namespace Business.Concrete
         public IDataResult<List<Car>> GetCarsByColorId(int id)
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == id));
+        }
+
+        [TransactionScopeAspect]
+        public IResult TransactionalOperation(Car car)
+        {
+            _carDal.Update(car);
+            return new SuccessResult(Messages.CarAdded);
         }
 
         [CacheRemoveAspect("ICarService.Get")]
