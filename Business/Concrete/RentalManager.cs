@@ -60,5 +60,9 @@ namespace Business.Concrete
             _rentalDal.Delete(rental);
             return new SuccessResult();
         }
+        public IDataResult<List<RentalDetailDto>> GetRentedCarDetail()
+        {
+            return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentedCarDetail());
+        }
     }
 }
